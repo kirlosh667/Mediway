@@ -34,23 +34,26 @@ class _DoctorDashboardScreenState
   Color getStatusColor(String status) {
     switch (status.toLowerCase()) {
       case "approved":
-        return const Color(0xFF2E7D32);
+        return const Color(0xFF16A34A);
       case "pending":
-        return const Color(0xFFED6C02);
+        return const Color(0xFFEA580C);
       case "rejected":
-        return const Color(0xFFD32F2F);
+        return const Color(0xFFDC2626);
       default:
-        return Colors.grey;
+        return const Color(0xFF64748B);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F8FB),
+      backgroundColor: const Color(0xFFF8FAFC),
+
       appBar: AppBar(
+        backgroundColor: Colors.white,
+        foregroundColor: const Color(0xFF1E293B),
         elevation: 0,
-        backgroundColor: const Color(0xFF1E88E5),
+        centerTitle: true,
         title: const Text(
           "Doctor Dashboard",
           style: TextStyle(
@@ -58,25 +61,32 @@ class _DoctorDashboardScreenState
           ),
         ),
       ),
+
       body: isLoading
           ? const Center(
               child: CircularProgressIndicator(
-                color: Color(0xFF1E88E5),
+                color: Color(0xFF2563EB),
               ),
             )
           : Column(
               children: [
 
-                // ================= HEADER SUMMARY =================
+                // ===== SUMMARY CARD =====
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.all(20),
-                  decoration: const BoxDecoration(
-                    color: Color(0xFF1E88E5),
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(24),
-                      bottomRight: Radius.circular(24),
-                    ),
+                  margin: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(22),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius:
+                        BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black
+                            .withOpacity(0.04),
+                        blurRadius: 14,
+                      )
+                    ],
                   ),
                   child: Column(
                     crossAxisAlignment:
@@ -85,7 +95,7 @@ class _DoctorDashboardScreenState
                       const Text(
                         "Today's Appointments",
                         style: TextStyle(
-                          color: Colors.white70,
+                          color: Color(0xFF64748B),
                           fontSize: 14,
                         ),
                       ),
@@ -93,26 +103,24 @@ class _DoctorDashboardScreenState
                       Text(
                         "${data.length}",
                         style: const TextStyle(
-                          color: Colors.white,
+                          color: Color(0xFF1E293B),
                           fontSize: 28,
                           fontWeight:
-                              FontWeight.bold,
+                              FontWeight.w600,
                         ),
                       ),
                     ],
                   ),
                 ),
 
-                const SizedBox(height: 20),
-
-                // ================= LIST =================
+                // ===== LIST =====
                 Expanded(
                   child: data.isEmpty
                       ? const Center(
                           child: Text(
                             "No appointments found",
                             style: TextStyle(
-                              color: Colors.grey,
+                              color: Color(0xFF64748B),
                               fontSize: 16,
                             ),
                           ),
@@ -159,8 +167,8 @@ class _DoctorDashboardScreenState
                                     color: Colors
                                         .black
                                         .withOpacity(
-                                            0.04),
-                                    blurRadius: 10,
+                                            0.03),
+                                    blurRadius: 12,
                                     offset:
                                         const Offset(
                                             0, 6),
@@ -199,7 +207,7 @@ class _DoctorDashboardScreenState
                                       decoration:
                                           BoxDecoration(
                                         color: const Color(
-                                                0xFFE3F2FD),
+                                                0xFFEFF6FF),
                                         borderRadius:
                                             BorderRadius
                                                 .circular(
@@ -210,7 +218,7 @@ class _DoctorDashboardScreenState
                                         Icons.person,
                                         color:
                                             Color(
-                                                0xFF1E88E5),
+                                                0xFF2563EB),
                                       ),
                                     ),
 
@@ -232,7 +240,10 @@ class _DoctorDashboardScreenState
                                                   16,
                                               fontWeight:
                                                   FontWeight
-                                                      .bold,
+                                                      .w600,
+                                              color:
+                                                  Color(
+                                                      0xFF1E293B),
                                             ),
                                           ),
                                           const SizedBox(
@@ -243,8 +254,8 @@ class _DoctorDashboardScreenState
                                             style:
                                                 const TextStyle(
                                               color:
-                                                  Colors
-                                                      .grey,
+                                                  Color(
+                                                      0xFF64748B),
                                             ),
                                           ),
                                           const SizedBox(
@@ -266,7 +277,7 @@ class _DoctorDashboardScreenState
                                                   getStatusColor(
                                                           status)
                                                       .withOpacity(
-                                                          0.12),
+                                                          0.10),
                                               borderRadius:
                                                   BorderRadius
                                                       .circular(
@@ -282,7 +293,7 @@ class _DoctorDashboardScreenState
                                                         status),
                                                 fontWeight:
                                                     FontWeight
-                                                        .bold,
+                                                        .w600,
                                                 fontSize:
                                                     12,
                                               ),
@@ -297,7 +308,8 @@ class _DoctorDashboardScreenState
                                           .arrow_forward_ios,
                                       size: 16,
                                       color:
-                                          Colors.grey,
+                                          Color(
+                                              0xFF94A3B8),
                                     )
                                   ],
                                 ),

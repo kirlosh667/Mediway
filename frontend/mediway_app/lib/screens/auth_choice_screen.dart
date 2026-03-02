@@ -9,18 +9,8 @@ class AuthChoiceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color(0xFF4A6CF7),
-              Color(0xFF6C8CFF),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
+      backgroundColor: const Color(0xFFF8FAFC),
+      body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(24),
@@ -28,10 +18,17 @@ class AuthChoiceScreen extends StatelessWidget {
               children: [
 
                 // 🏥 App Branding
-                const Icon(
-                  Icons.local_hospital_rounded,
-                  size: 90,
-                  color: Colors.white,
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFEFF6FF),
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                  child: const Icon(
+                    Icons.local_hospital_rounded,
+                    size: 70,
+                    color: Color(0xFF2563EB),
+                  ),
                 ),
 
                 const SizedBox(height: 20),
@@ -39,10 +36,10 @@ class AuthChoiceScreen extends StatelessWidget {
                 const Text(
                   "MediWay",
                   style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    letterSpacing: 1.2,
+                    fontSize: 28,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF1E293B),
+                    letterSpacing: 0.8,
                   ),
                 ),
 
@@ -52,17 +49,26 @@ class AuthChoiceScreen extends StatelessWidget {
                   "Smart Medical Triage & Appointment System",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white70,
+                    color: Color(0xFF64748B),
+                    fontSize: 14,
                   ),
                 ),
 
                 const SizedBox(height: 40),
 
                 // 📦 Action Card
-                Card(
-                  elevation: 10,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(22),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.04),
+                        blurRadius: 18,
+                        offset: const Offset(0, 8),
+                      )
+                    ],
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(28),
@@ -83,19 +89,25 @@ class AuthChoiceScreen extends StatelessWidget {
                               );
                             },
                             style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF2563EB),
+                              foregroundColor: Colors.white,
+                              elevation: 0,
                               padding: const EdgeInsets.symmetric(vertical: 16),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(14),
+                                borderRadius: BorderRadius.circular(16),
                               ),
                             ),
                             label: const Text(
                               "Patient Login",
-                              style: TextStyle(fontSize: 16),
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ),
 
-                        const SizedBox(height: 15),
+                        const SizedBox(height: 16),
 
                         // 📝 Register
                         SizedBox(
@@ -111,21 +123,31 @@ class AuthChoiceScreen extends StatelessWidget {
                               );
                             },
                             style: OutlinedButton.styleFrom(
+                              foregroundColor: const Color(0xFF2563EB),
+                              side: const BorderSide(
+                                color: Color(0xFF2563EB),
+                              ),
                               padding: const EdgeInsets.symmetric(vertical: 16),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(14),
+                                borderRadius: BorderRadius.circular(16),
                               ),
                             ),
                             label: const Text(
                               "Create Patient Account",
-                              style: TextStyle(fontSize: 16),
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                         ),
 
                         const SizedBox(height: 25),
 
-                        const Divider(),
+                        const Divider(
+                          color: Color(0xFFE2E8F0),
+                          thickness: 1,
+                        ),
 
                         const SizedBox(height: 15),
 
@@ -133,7 +155,10 @@ class AuthChoiceScreen extends StatelessWidget {
                         SizedBox(
                           width: double.infinity,
                           child: TextButton.icon(
-                            icon: const Icon(Icons.local_hospital_outlined),
+                            icon: const Icon(
+                              Icons.local_hospital_outlined,
+                              color: Color(0xFF2563EB),
+                            ),
                             onPressed: () {
                               Navigator.push(
                                 context,
@@ -144,11 +169,15 @@ class AuthChoiceScreen extends StatelessWidget {
                               );
                             },
                             style: TextButton.styleFrom(
+                              foregroundColor: const Color(0xFF2563EB),
                               padding: const EdgeInsets.symmetric(vertical: 14),
                             ),
                             label: const Text(
                               "Hospital / Admin Login",
-                              style: TextStyle(fontSize: 15),
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                         ),

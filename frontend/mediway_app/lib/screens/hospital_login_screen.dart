@@ -110,9 +110,13 @@ class _HospitalLoginScreenState
   }) {
     return InputDecoration(
       labelText: label,
+      labelStyle: const TextStyle(
+        color: Color(0xFF334155),
+        fontWeight: FontWeight.w500,
+      ),
       prefixIcon: Icon(
         icon,
-        color: const Color(0xFF1E88E5),
+        color: const Color(0xFF2563EB),
       ),
       filled: true,
       fillColor: Colors.white,
@@ -122,7 +126,7 @@ class _HospitalLoginScreenState
               horizontal: 16),
       border: OutlineInputBorder(
         borderRadius:
-            BorderRadius.circular(18),
+            BorderRadius.circular(16),
         borderSide:
             BorderSide(
                 color:
@@ -131,7 +135,7 @@ class _HospitalLoginScreenState
       enabledBorder:
           OutlineInputBorder(
         borderRadius:
-            BorderRadius.circular(18),
+            BorderRadius.circular(16),
         borderSide:
             BorderSide(
                 color:
@@ -141,9 +145,9 @@ class _HospitalLoginScreenState
           const OutlineInputBorder(
         borderRadius:
             BorderRadius.all(
-                Radius.circular(18)),
+                Radius.circular(16)),
         borderSide: BorderSide(
-          color: Color(0xFF1E88E5),
+          color: Color(0xFF2563EB),
           width: 1.6,
         ),
       ),
@@ -155,14 +159,14 @@ class _HospitalLoginScreenState
 
     return Scaffold(
       backgroundColor:
-          const Color(0xFFF4F8FB),
+          const Color(0xFFF8FAFC),
 
       body: isLoading
           ? const Center(
               child:
                   CircularProgressIndicator(
                 color:
-                    Color(0xFF1E88E5),
+                    Color(0xFF2563EB),
               ),
             )
           : Center(
@@ -191,12 +195,9 @@ class _HospitalLoginScreenState
                           color: Colors
                               .black
                               .withOpacity(
-                                  0.06),
+                                  0.05),
                           blurRadius:
                               20,
-                          offset:
-                              const Offset(
-                                  0, 10),
                         )
                       ],
                     ),
@@ -206,7 +207,7 @@ class _HospitalLoginScreenState
                               .start,
                       children: [
 
-                        // ================= HEADER =================
+                        // HEADER
                         Row(
                           children: const [
                             Icon(
@@ -215,7 +216,7 @@ class _HospitalLoginScreenState
                               size: 36,
                               color:
                                   Color(
-                                      0xFF1E88E5),
+                                      0xFF2563EB),
                             ),
                             SizedBox(
                                 width: 12),
@@ -227,7 +228,10 @@ class _HospitalLoginScreenState
                                     22,
                                 fontWeight:
                                     FontWeight
-                                        .bold,
+                                        .w600,
+                                color:
+                                    Color(
+                                        0xFF1E293B),
                               ),
                             ),
                           ],
@@ -240,14 +244,15 @@ class _HospitalLoginScreenState
                           "Secure login for doctors and administrators.",
                           style: TextStyle(
                             color:
-                                Colors.grey,
+                                Color(
+                                    0xFF64748B),
                           ),
                         ),
 
                         const SizedBox(
                             height: 35),
 
-                        // ================= USER DROPDOWN =================
+                        // USER DROPDOWN
                         DropdownButtonFormField<
                             String>(
                           value:
@@ -259,6 +264,8 @@ class _HospitalLoginScreenState
                             icon: Icons
                                 .person_outline,
                           ),
+                          dropdownColor:
+                              Colors.white,
                           items: users.map<
                                   DropdownMenuItem<
                                       String>>(
@@ -272,6 +279,9 @@ class _HospitalLoginScreenState
                                         "admin"
                                     ? "Admin (${user["username"]})"
                                     : user["name"],
+                                style: const TextStyle(
+                                    color: Color(
+                                        0xFF1E293B)),
                               ),
                             );
                           }).toList(),
@@ -297,12 +307,17 @@ class _HospitalLoginScreenState
                         const SizedBox(
                             height: 20),
 
-                        // ================= PASSWORD =================
+                        // PASSWORD
                         TextField(
                           controller:
                               passwordController,
                           obscureText:
                               true,
+                          style: const TextStyle(
+                            color:
+                                Color(
+                                    0xFF1E293B),
+                          ),
                           decoration:
                               buildInputDecoration(
                             label:
@@ -315,7 +330,7 @@ class _HospitalLoginScreenState
                         const SizedBox(
                             height: 35),
 
-                        // ================= LOGIN BUTTON =================
+                        // LOGIN BUTTON
                         SizedBox(
                           width:
                               double.infinity,
@@ -329,11 +344,17 @@ class _HospitalLoginScreenState
                             style:
                                 ElevatedButton
                                     .styleFrom(
+                              backgroundColor:
+                                  const Color(
+                                      0xFF2563EB),
+                              foregroundColor:
+                                  Colors.white,
+                              elevation: 0,
                               shape:
                                   RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.circular(
-                                        18),
+                                        16),
                               ),
                             ),
                             child:

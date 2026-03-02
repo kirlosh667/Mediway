@@ -43,26 +43,26 @@ class _DashboardScreenState
   Color getRiskColor(String risk) {
     switch (risk.toUpperCase()) {
       case "HIGH":
-        return const Color(0xFFD32F2F);
+        return const Color(0xFFDC2626);
       case "MODERATE":
-        return const Color(0xFFED6C02);
+        return const Color(0xFFEA580C);
       case "LOW":
-        return const Color(0xFF2E7D32);
+        return const Color(0xFF16A34A);
       default:
-        return Colors.grey;
+        return const Color(0xFF64748B);
     }
   }
 
   Color getStatusColor(String status) {
     switch (status.toLowerCase()) {
       case "approved":
-        return const Color(0xFF2E7D32);
+        return const Color(0xFF16A34A);
       case "pending":
-        return const Color(0xFFED6C02);
+        return const Color(0xFFEA580C);
       case "cancelled":
-        return const Color(0xFFD32F2F);
+        return const Color(0xFFDC2626);
       default:
-        return Colors.grey;
+        return const Color(0xFF64748B);
     }
   }
 
@@ -73,8 +73,8 @@ class _DashboardScreenState
         title,
         style: const TextStyle(
           fontSize: 20,
-          fontWeight: FontWeight.bold,
-          color: Color(0xFF1C1C1C),
+          fontWeight: FontWeight.w600,
+          color: Color(0xFF1E293B),
         ),
       ),
     );
@@ -85,7 +85,7 @@ class _DashboardScreenState
       padding: const EdgeInsets.symmetric(
           horizontal: 14, vertical: 6),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.12),
+        color: color.withOpacity(0.10),
         borderRadius: BorderRadius.circular(30),
       ),
       child: Text(
@@ -102,11 +102,13 @@ class _DashboardScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F8FB),
+      backgroundColor: const Color(0xFFF8FAFC),
 
       appBar: AppBar(
+        backgroundColor: Colors.white,
+        foregroundColor: const Color(0xFF1E293B),
         elevation: 0,
-        backgroundColor: const Color(0xFF1E88E5),
+        centerTitle: true,
         title: const Text(
           "Patient Dashboard",
           style: TextStyle(fontWeight: FontWeight.w600),
@@ -132,10 +134,11 @@ class _DashboardScreenState
       body: isLoading
           ? const Center(
               child: CircularProgressIndicator(
-                color: Color(0xFF1E88E5),
+                color: Color(0xFF2563EB),
               ),
             )
           : RefreshIndicator(
+              color: const Color(0xFF2563EB),
               onRefresh: loadData,
               child: SingleChildScrollView(
                 physics:
@@ -146,19 +149,21 @@ class _DashboardScreenState
                       CrossAxisAlignment.start,
                   children: [
 
-                    // ================= WELCOME CARD =================
+                    // ===== SUMMARY CARD =====
                     Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.all(24),
+                      padding: const EdgeInsets.all(22),
                       decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [
-                            Color(0xFF1E88E5),
-                            Color(0xFF1565C0),
-                          ],
-                        ),
+                        color: Colors.white,
                         borderRadius:
                             BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black
+                                .withOpacity(0.04),
+                            blurRadius: 14,
+                          )
+                        ],
                       ),
                       child: Column(
                         crossAxisAlignment:
@@ -167,7 +172,7 @@ class _DashboardScreenState
                           const Text(
                             "Welcome Back 👋",
                             style: TextStyle(
-                              color: Colors.white70,
+                              color: Color(0xFF64748B),
                               fontSize: 14,
                             ),
                           ),
@@ -175,10 +180,10 @@ class _DashboardScreenState
                           Text(
                             "You have ${appointments.length} appointments",
                             style: const TextStyle(
-                              color: Colors.white,
+                              color: Color(0xFF1E293B),
                               fontSize: 20,
                               fontWeight:
-                                  FontWeight.bold,
+                                  FontWeight.w600,
                             ),
                           ),
                         ],
@@ -187,12 +192,11 @@ class _DashboardScreenState
 
                     const SizedBox(height: 30),
 
-                    // ================= NEW HEALTH CHECK =================
+                    // ===== NEW HEALTH CHECK =====
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton.icon(
-                        icon: const Icon(
-                            Icons.health_and_safety),
+                        icon: const Icon(Icons.health_and_safety),
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -204,15 +208,16 @@ class _DashboardScreenState
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
-                              const Color(0xFF2E7D32),
+                              const Color(0xFF2563EB),
+                          foregroundColor: Colors.white,
+                          elevation: 0,
                           padding:
                               const EdgeInsets.symmetric(
                                   vertical: 18),
                           shape:
                               RoundedRectangleBorder(
                             borderRadius:
-                                BorderRadius.circular(
-                                    18),
+                                BorderRadius.circular(18),
                           ),
                         ),
                         label: const Text(
@@ -228,14 +233,14 @@ class _DashboardScreenState
 
                     const SizedBox(height: 40),
 
-                    // ================= HISTORY =================
+                    // ===== HISTORY =====
                     sectionTitle("Past Health Checkups"),
 
                     history.isEmpty
                         ? const Text(
                             "No health checkups yet.",
                             style: TextStyle(
-                                color: Colors.grey),
+                                color: Color(0xFF64748B)),
                           )
                         : Column(
                             children: history.map(
@@ -245,44 +250,54 @@ class _DashboardScreenState
                                             ?.toString() ??
                                         "Unknown";
 
-                                return Card(
-                                  elevation: 2,
+                                return Container(
                                   margin:
                                       const EdgeInsets.only(
                                           bottom: 14),
-                                  shape:
-                                      RoundedRectangleBorder(
+                                  padding:
+                                      const EdgeInsets.all(
+                                          18),
+                                  decoration:
+                                      BoxDecoration(
+                                    color: Colors.white,
                                     borderRadius:
                                         BorderRadius
-                                            .circular(18),
+                                            .circular(
+                                                18),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors
+                                            .black
+                                            .withOpacity(
+                                                0.03),
+                                        blurRadius: 10,
+                                      )
+                                    ],
                                   ),
-                                  child: Padding(
-                                    padding:
-                                        const EdgeInsets
-                                            .all(18),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment
-                                              .spaceBetween,
-                                      children: [
-                                        Text(
-                                          item["symptom"]
-                                                  ?.toString() ??
-                                              "Unknown",
-                                          style:
-                                              const TextStyle(
-                                            fontSize: 15,
-                                            fontWeight:
-                                                FontWeight
-                                                    .w600,
-                                          ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment
+                                            .spaceBetween,
+                                    children: [
+                                      Text(
+                                        item["symptom"]
+                                                ?.toString() ??
+                                            "Unknown",
+                                        style:
+                                            const TextStyle(
+                                          fontSize: 15,
+                                          fontWeight:
+                                              FontWeight
+                                                  .w600,
+                                          color: Color(
+                                              0xFF1E293B),
                                         ),
-                                        statusBadge(
-                                            risk,
-                                            getRiskColor(
-                                                risk)),
-                                      ],
-                                    ),
+                                      ),
+                                      statusBadge(
+                                          risk,
+                                          getRiskColor(
+                                              risk)),
+                                    ],
                                   ),
                                 );
                               },
@@ -291,14 +306,14 @@ class _DashboardScreenState
 
                     const SizedBox(height: 40),
 
-                    // ================= APPOINTMENTS =================
+                    // ===== APPOINTMENTS =====
                     sectionTitle("Appointments"),
 
                     appointments.isEmpty
                         ? const Text(
                             "No appointments booked.",
                             style: TextStyle(
-                                color: Colors.grey),
+                                color: Color(0xFF64748B)),
                           )
                         : Column(
                             children:
@@ -323,69 +338,79 @@ class _DashboardScreenState
                                     ).then((_) =>
                                         loadData());
                                   },
-                                  child: Card(
-                                    elevation: 2,
+                                  child: Container(
                                     margin:
                                         const EdgeInsets
                                             .only(
                                                 bottom:
                                                     14),
-                                    shape:
-                                        RoundedRectangleBorder(
+                                    padding:
+                                        const EdgeInsets
+                                            .all(18),
+                                    decoration:
+                                        BoxDecoration(
+                                      color:
+                                          Colors.white,
                                       borderRadius:
                                           BorderRadius
                                               .circular(
                                                   18),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors
+                                              .black
+                                              .withOpacity(
+                                                  0.03),
+                                          blurRadius:
+                                              10,
+                                        )
+                                      ],
                                     ),
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets
-                                              .all(
-                                                  18),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment
-                                                .spaceBetween,
-                                        children: [
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment
-                                                    .start,
-                                            children: [
-                                              Text(
-                                                item["doctor_name"]
-                                                        ?.toString() ??
-                                                    "Unknown Doctor",
-                                                style:
-                                                    const TextStyle(
-                                                  fontSize:
-                                                      15,
-                                                  fontWeight:
-                                                      FontWeight
-                                                          .w600,
-                                                ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment
+                                              .spaceBetween,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment
+                                                  .start,
+                                          children: [
+                                            Text(
+                                              item["doctor_name"]
+                                                      ?.toString() ??
+                                                  "Unknown Doctor",
+                                              style:
+                                                  const TextStyle(
+                                                fontSize:
+                                                    15,
+                                                fontWeight:
+                                                    FontWeight
+                                                        .w600,
+                                                color: Color(
+                                                    0xFF1E293B),
                                               ),
-                                              const SizedBox(
-                                                  height:
-                                                      6),
-                                              Text(
-                                                item["appointment_date"]
-                                                        ?.toString() ??
-                                                    "",
-                                                style:
-                                                    const TextStyle(
-                                                  color:
-                                                      Colors.grey,
-                                                ),
+                                            ),
+                                            const SizedBox(
+                                                height: 6),
+                                            Text(
+                                              item["appointment_date"]
+                                                      ?.toString() ??
+                                                  "",
+                                              style:
+                                                  const TextStyle(
+                                                color:
+                                                    Color(
+                                                        0xFF64748B),
                                               ),
-                                            ],
-                                          ),
-                                          statusBadge(
-                                              status,
-                                              getStatusColor(
-                                                  status)),
-                                        ],
-                                      ),
+                                            ),
+                                          ],
+                                        ),
+                                        statusBadge(
+                                            status,
+                                            getStatusColor(
+                                                status)),
+                                      ],
                                     ),
                                   ),
                                 );

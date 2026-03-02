@@ -14,35 +14,19 @@ class SuggestionScreen extends StatelessWidget {
     switch (risk.toLowerCase()) {
       case "high":
       case "emergency":
-        return const Color(0xFFD32F2F);
+        return const Color(0xFFDC2626);
       case "moderate":
       case "medium":
-        return const Color(0xFFED6C02);
+        return const Color(0xFFEA580C);
       case "low":
-        return const Color(0xFF2E7D32);
+        return const Color(0xFF16A34A);
       default:
-        return const Color(0xFF1E88E5);
-    }
-  }
-
-  IconData getRiskIcon(String risk) {
-    switch (risk.toLowerCase()) {
-      case "high":
-      case "emergency":
-        return Icons.warning_amber_rounded;
-      case "moderate":
-      case "medium":
-        return Icons.error_outline;
-      case "low":
-        return Icons.check_circle_outline;
-      default:
-        return Icons.info_outline;
+        return const Color(0xFF2563EB);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-
     final risk = result["risk_level"] ?? "Unknown";
     final specialist =
         result["recommended_specialist"] ?? "General";
@@ -52,9 +36,13 @@ class SuggestionScreen extends StatelessWidget {
     final riskColor = getRiskColor(risk);
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F8FB),
+      backgroundColor: const Color(0xFFF9FBFF),
 
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
+        foregroundColor: const Color(0xFF1E293B),
         title: const Text(
           "Assessment Summary",
           style: TextStyle(fontWeight: FontWeight.w600),
@@ -70,83 +58,57 @@ class SuggestionScreen extends StatelessWidget {
                 CrossAxisAlignment.stretch,
             children: [
 
-              // ================= RISK CARD =================
               Container(
-                padding:
-                    const EdgeInsets.symmetric(
-                        vertical: 30,
-                        horizontal: 24),
+                padding: const EdgeInsets.all(30),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius:
                       BorderRadius.circular(24),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black
-                          .withOpacity(0.05),
-                      blurRadius: 15,
-                      offset:
-                          const Offset(0, 8),
+                      color: Colors.blue.withOpacity(0.05),
+                      blurRadius: 20,
+                      offset: const Offset(0, 10),
                     ),
                   ],
-                  border: Border.all(
-                    color: riskColor
-                        .withOpacity(0.5),
-                    width: 1.4,
-                  ),
                 ),
                 child: Column(
                   children: [
-
                     Icon(
-                      getRiskIcon(risk),
-                      size: 64,
+                      Icons.health_and_safety,
+                      size: 60,
                       color: riskColor,
                     ),
-
-                    const SizedBox(height: 18),
-
+                    const SizedBox(height: 16),
                     const Text(
                       "Risk Level",
                       style: TextStyle(
-                        fontSize: 13,
-                        color: Colors.grey,
+                        color: Color(0xFF64748B),
                       ),
                     ),
-
                     const SizedBox(height: 6),
-
                     Text(
                       risk.toUpperCase(),
                       style: TextStyle(
                         fontSize: 28,
-                        fontWeight:
-                            FontWeight.bold,
+                        fontWeight: FontWeight.bold,
                         color: riskColor,
-                        letterSpacing: 1,
                       ),
                     ),
-
                     const SizedBox(height: 12),
-
                     Container(
-                      padding:
-                          const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 18, vertical: 8),
                       decoration: BoxDecoration(
-                        color: riskColor
-                            .withOpacity(0.1),
+                        color: riskColor.withOpacity(0.1),
                         borderRadius:
-                            BorderRadius.circular(
-                                20),
+                            BorderRadius.circular(30),
                       ),
                       child: Text(
                         "Score: $score",
                         style: TextStyle(
-                          fontWeight:
-                              FontWeight.w600,
                           color: riskColor,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
@@ -156,21 +118,16 @@ class SuggestionScreen extends StatelessWidget {
 
               const SizedBox(height: 30),
 
-              // ================= SPECIALIST CARD =================
               Container(
-                padding:
-                    const EdgeInsets.all(22),
+                padding: const EdgeInsets.all(22),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius:
                       BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black
-                          .withOpacity(0.04),
+                      color: Colors.black.withOpacity(0.04),
                       blurRadius: 12,
-                      offset:
-                          const Offset(0, 6),
                     ),
                   ],
                 ),
@@ -178,17 +135,13 @@ class SuggestionScreen extends StatelessWidget {
                   crossAxisAlignment:
                       CrossAxisAlignment.start,
                   children: [
-
                     const Text(
                       "Recommended Specialist",
                       style: TextStyle(
-                        fontSize: 13,
-                        color: Colors.grey,
+                        color: Color(0xFF64748B),
                       ),
                     ),
-
                     const SizedBox(height: 8),
-
                     Text(
                       specialist,
                       style: const TextStyle(
@@ -196,7 +149,7 @@ class SuggestionScreen extends StatelessWidget {
                         fontWeight:
                             FontWeight.w600,
                         color:
-                            Color(0xFF1C1C1C),
+                            Color(0xFF1E293B),
                       ),
                     ),
                   ],
@@ -205,7 +158,6 @@ class SuggestionScreen extends StatelessWidget {
 
               const Spacer(),
 
-              // ================= PRIMARY BUTTON =================
               SizedBox(
                 height: 56,
                 child: ElevatedButton(
@@ -222,11 +174,12 @@ class SuggestionScreen extends StatelessWidget {
                     );
                   },
                   style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        const Color(0xFF2563EB),
                     shape:
                         RoundedRectangleBorder(
                       borderRadius:
-                          BorderRadius.circular(
-                              18),
+                          BorderRadius.circular(20),
                     ),
                   ),
                   child: const Text(
@@ -242,7 +195,6 @@ class SuggestionScreen extends StatelessWidget {
 
               const SizedBox(height: 14),
 
-              // ================= SECONDARY BUTTON =================
               SizedBox(
                 height: 52,
                 child: OutlinedButton(
@@ -257,25 +209,23 @@ class SuggestionScreen extends StatelessWidget {
                     );
                   },
                   style: OutlinedButton.styleFrom(
+                    side: const BorderSide(
+                        color: Color(0xFF2563EB)),
                     shape:
                         RoundedRectangleBorder(
                       borderRadius:
-                          BorderRadius.circular(
-                              18),
+                          BorderRadius.circular(20),
                     ),
                   ),
                   child: const Text(
                     "Back to Dashboard",
                     style: TextStyle(
-                      fontSize: 15,
-                      fontWeight:
-                          FontWeight.w500,
+                      color:
+                          Color(0xFF2563EB),
                     ),
                   ),
                 ),
               ),
-
-              const SizedBox(height: 8),
             ],
           ),
         ),

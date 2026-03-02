@@ -31,18 +31,19 @@ class _AdminDashboardScreenState
     });
   }
 
+  // Updated to modern medical palette
   Color getStatusColor(String status) {
     switch (status.toLowerCase()) {
       case "scheduled":
-        return const Color(0xFF1E88E5);
+        return const Color(0xFF2563EB);
       case "approved":
       case "completed":
-        return const Color(0xFF2E7D32);
+        return const Color(0xFF16A34A);
       case "cancelled":
       case "rejected":
-        return const Color(0xFFD32F2F);
+        return const Color(0xFFDC2626);
       default:
-        return Colors.grey;
+        return const Color(0xFF64748B);
     }
   }
 
@@ -53,7 +54,7 @@ class _AdminDashboardScreenState
       padding: const EdgeInsets.symmetric(
           horizontal: 14, vertical: 6),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.12),
+        color: color.withOpacity(0.10),
         borderRadius:
             BorderRadius.circular(20),
       ),
@@ -61,7 +62,7 @@ class _AdminDashboardScreenState
         status.toUpperCase(),
         style: TextStyle(
           color: color,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w600,
           fontSize: 12,
         ),
       ),
@@ -73,9 +74,9 @@ class _AdminDashboardScreenState
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFF4F8FB),
+        color: const Color(0xFFF1F5F9),
         borderRadius:
-            BorderRadius.circular(16),
+            BorderRadius.circular(14),
       ),
       child: Column(
         crossAxisAlignment:
@@ -85,13 +86,14 @@ class _AdminDashboardScreenState
             m["doctor_name"] ?? "",
             style: const TextStyle(
               fontWeight: FontWeight.w600,
+              color: Color(0xFF1E293B),
             ),
           ),
           const SizedBox(height: 6),
           Text(
             m["message"] ?? "",
             style: const TextStyle(
-              color: Color(0xFF333333),
+              color: Color(0xFF334155),
             ),
           ),
         ],
@@ -104,9 +106,13 @@ class _AdminDashboardScreenState
 
     return Scaffold(
       backgroundColor:
-          const Color(0xFFF4F8FB),
+          const Color(0xFFF8FAFC),
 
       appBar: AppBar(
+        backgroundColor: Colors.white,
+        foregroundColor: const Color(0xFF1E293B),
+        elevation: 0,
+        centerTitle: true,
         title: const Text(
           "Admin Dashboard",
           style: TextStyle(
@@ -120,23 +126,24 @@ class _AdminDashboardScreenState
               child:
                   CircularProgressIndicator(
                 color:
-                    Color(0xFF1E88E5),
+                    Color(0xFF2563EB),
               ),
             )
           : RefreshIndicator(
+              color: const Color(0xFF2563EB),
               onRefresh: load,
               child: data.isEmpty
                   ? const Center(
                       child: Text(
                         "No appointments available",
                         style: TextStyle(
-                            color: Colors.grey),
+                            color: Color(0xFF64748B)),
                       ),
                     )
                   : ListView.builder(
                       padding:
                           const EdgeInsets.symmetric(
-                              horizontal: 24,
+                              horizontal: 20,
                               vertical: 20),
                       itemCount: data.length,
                       itemBuilder:
@@ -149,7 +156,7 @@ class _AdminDashboardScreenState
                         return Container(
                           margin:
                               const EdgeInsets.only(
-                                  bottom: 24),
+                                  bottom: 22),
                           padding:
                               const EdgeInsets.all(
                                   22),
@@ -157,12 +164,12 @@ class _AdminDashboardScreenState
                             color: Colors.white,
                             borderRadius:
                                 BorderRadius.circular(
-                                    24),
+                                    20),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black
-                                    .withOpacity(0.05),
-                                blurRadius: 15,
+                                    .withOpacity(0.04),
+                                blurRadius: 18,
                                 offset:
                                     const Offset(0, 8),
                               )
@@ -174,7 +181,7 @@ class _AdminDashboardScreenState
                                     .start,
                             children: [
 
-                              // ================= HEADER =================
+                              // HEADER
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment
@@ -187,7 +194,9 @@ class _AdminDashboardScreenState
                                           const TextStyle(
                                         fontSize: 18,
                                         fontWeight:
-                                            FontWeight.bold,
+                                            FontWeight.w600,
+                                        color:
+                                            Color(0xFF1E293B),
                                       ),
                                     ),
                                   ),
@@ -196,13 +205,14 @@ class _AdminDashboardScreenState
                                 ],
                               ),
 
-                              const SizedBox(height: 8),
+                              const SizedBox(height: 10),
 
                               Text(
                                 "Doctor: ${e["doctor_name"] ?? ""}",
                                 style: const TextStyle(
                                   fontSize: 14,
-                                  color: Colors.grey,
+                                  color:
+                                      Color(0xFF475569),
                                 ),
                               ),
 
@@ -214,19 +224,22 @@ class _AdminDashboardScreenState
                                     "",
                                 style: const TextStyle(
                                   fontSize: 13,
-                                  color: Colors.grey,
+                                  color:
+                                      Color(0xFF64748B),
                                 ),
                               ),
 
                               const SizedBox(height: 22),
 
-                              // ================= MESSAGES =================
+                              // MESSAGES
                               if (messages.isNotEmpty) ...[
                                 const Text(
                                   "Doctor Notes",
                                   style: TextStyle(
                                     fontWeight:
                                         FontWeight.w600,
+                                    color:
+                                        Color(0xFF1E293B),
                                   ),
                                 ),
                                 const SizedBox(

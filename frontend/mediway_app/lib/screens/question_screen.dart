@@ -65,10 +65,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
     );
   }
 
-  Widget buildChoice(
-      int questionId,
-      Map choice,
-  ) {
+  Widget buildChoice(int questionId, Map choice) {
     bool isSelected =
         selectedAnswers[questionId] == choice["id"];
 
@@ -84,12 +81,12 @@ class _QuestionScreenState extends State<QuestionScreen> {
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
           color: isSelected
-              ? const Color(0xFF1E88E5).withOpacity(0.08)
+              ? const Color(0xFF2563EB).withOpacity(0.08)
               : Colors.white,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
             color: isSelected
-                ? const Color(0xFF1E88E5)
+                ? const Color(0xFF2563EB)
                 : Colors.grey.shade300,
             width: isSelected ? 1.6 : 1,
           ),
@@ -97,7 +94,6 @@ class _QuestionScreenState extends State<QuestionScreen> {
             BoxShadow(
               color: Colors.black.withOpacity(0.03),
               blurRadius: 6,
-              offset: const Offset(0, 3),
             )
           ],
         ),
@@ -112,12 +108,12 @@ class _QuestionScreenState extends State<QuestionScreen> {
                 shape: BoxShape.circle,
                 border: Border.all(
                   color: isSelected
-                      ? const Color(0xFF1E88E5)
-                      : Colors.grey,
+                      ? const Color(0xFF2563EB)
+                      : const Color(0xFF94A3B8),
                   width: 1.5,
                 ),
                 color: isSelected
-                    ? const Color(0xFF1E88E5)
+                    ? const Color(0xFF2563EB)
                     : Colors.white,
               ),
               child: isSelected
@@ -136,7 +132,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                 choice["text"],
                 style: const TextStyle(
                   fontSize: 15,
-                  color: Color(0xFF1C1C1C),
+                  color: Color(0xFF1E293B),
                 ),
               ),
             ),
@@ -152,9 +148,13 @@ class _QuestionScreenState extends State<QuestionScreen> {
     int answeredCount = selectedAnswers.length;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F8FB),
+      backgroundColor: const Color(0xFFF8FAFC),
 
       appBar: AppBar(
+        backgroundColor: Colors.white,
+        foregroundColor: const Color(0xFF1E293B),
+        elevation: 0,
+        centerTitle: true,
         title: const Text(
           "Medical Questionnaire",
           style: TextStyle(fontWeight: FontWeight.w600),
@@ -164,13 +164,13 @@ class _QuestionScreenState extends State<QuestionScreen> {
       body: isLoading
           ? const Center(
               child: CircularProgressIndicator(
-                color: Color(0xFF1E88E5),
+                color: Color(0xFF2563EB),
               ),
             )
           : Column(
               children: [
 
-                // ================= PROGRESS SECTION =================
+                // ===== PROGRESS SECTION =====
                 Container(
                   padding: const EdgeInsets.all(24),
                   child: Column(
@@ -182,7 +182,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                         "Answered $answeredCount of ${questions.length} questions",
                         style: const TextStyle(
                           fontSize: 14,
-                          color: Colors.grey,
+                          color: Color(0xFF64748B),
                         ),
                       ),
 
@@ -199,15 +199,16 @@ class _QuestionScreenState extends State<QuestionScreen> {
                           minHeight: 8,
                           backgroundColor:
                               Colors.grey.shade200,
-                          color:
-                              const Color(0xFF1E88E5),
+                          valueColor:
+                              const AlwaysStoppedAnimation(
+                                  Color(0xFF2563EB)),
                         ),
                       ),
                     ],
                   ),
                 ),
 
-                // ================= QUESTION LIST =================
+                // ===== QUESTION LIST =====
                 Expanded(
                   child: ListView.builder(
                     padding:
@@ -219,66 +220,71 @@ class _QuestionScreenState extends State<QuestionScreen> {
                       final q = questions[index];
                       final questionId = q["id"];
 
-                      return Card(
-                        elevation: 2,
+                      return Container(
                         margin:
                             const EdgeInsets.only(
                                 bottom: 18),
-                        shape:
-                            RoundedRectangleBorder(
+                        padding:
+                            const EdgeInsets.all(20),
+                        decoration:
+                            BoxDecoration(
+                          color: Colors.white,
                           borderRadius:
                               BorderRadius.circular(
                                   18),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black
+                                  .withOpacity(0.03),
+                              blurRadius: 10,
+                            )
+                          ],
                         ),
-                        child: Padding(
-                          padding:
-                              const EdgeInsets.all(
-                                  20),
-                          child: Column(
-                            crossAxisAlignment:
-                                CrossAxisAlignment
-                                    .start,
-                            children: [
+                        child: Column(
+                          crossAxisAlignment:
+                              CrossAxisAlignment
+                                  .start,
+                          children: [
 
-                              Text(
-                                "Question ${index + 1}",
-                                style: const TextStyle(
-                                  fontSize: 13,
-                                  color: Colors.grey,
-                                ),
+                            Text(
+                              "Question ${index + 1}",
+                              style: const TextStyle(
+                                fontSize: 13,
+                                color:
+                                    Color(0xFF64748B),
                               ),
+                            ),
 
-                              const SizedBox(height: 6),
+                            const SizedBox(height: 6),
 
-                              Text(
-                                q["text"],
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight:
-                                      FontWeight.w600,
-                                  color:
-                                      Color(0xFF1C1C1C),
-                                ),
+                            Text(
+                              q["text"],
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight:
+                                    FontWeight.w600,
+                                color:
+                                    Color(0xFF1E293B),
                               ),
+                            ),
 
-                              const SizedBox(height: 16),
+                            const SizedBox(height: 16),
 
-                              ...q["choices"]
-                                  .map<Widget>((choice) =>
-                                      buildChoice(
-                                        questionId,
-                                        choice,
-                                      ))
-                                  .toList(),
-                            ],
-                          ),
+                            ...q["choices"]
+                                .map<Widget>((choice) =>
+                                    buildChoice(
+                                      questionId,
+                                      choice,
+                                    ))
+                                .toList(),
+                          ],
                         ),
                       );
                     },
                   ),
                 ),
 
-                // ================= SUBMIT BUTTON =================
+                // ===== SUBMIT BUTTON =====
                 Padding(
                   padding:
                       const EdgeInsets.fromLTRB(
@@ -289,6 +295,11 @@ class _QuestionScreenState extends State<QuestionScreen> {
                       onPressed: submit,
                       style:
                           ElevatedButton.styleFrom(
+                        backgroundColor:
+                            const Color(0xFF2563EB),
+                        foregroundColor:
+                            Colors.white,
+                        elevation: 0,
                         padding:
                             const EdgeInsets.symmetric(
                                 vertical: 18),

@@ -343,4 +343,5 @@ static Future<bool> sendMessageToAppointment(
   return response.statusCode == 200 ||
       response.statusCode == 201;
 }
+
 }

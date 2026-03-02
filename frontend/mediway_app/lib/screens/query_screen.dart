@@ -25,13 +25,13 @@ class _QueryScreenState extends State<QueryScreen> {
     switch (risk.toLowerCase()) {
       case "high":
       case "emergency":
-        return const Color(0xFFD32F2F);
+        return const Color(0xFFDC2626);
       case "moderate":
-        return const Color(0xFFED6C02);
+        return const Color(0xFFEA580C);
       case "low":
-        return const Color(0xFF2E7D32);
+        return const Color(0xFF16A34A);
       default:
-        return const Color(0xFF1E88E5);
+        return const Color(0xFF2563EB);
     }
   }
 
@@ -74,9 +74,13 @@ class _QueryScreenState extends State<QueryScreen> {
     final riskColor = getRiskColor(risk);
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F8FB),
+      backgroundColor: const Color(0xFFF9FBFF),
 
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        foregroundColor: const Color(0xFF1E293B),
+        centerTitle: true,
         title: const Text(
           "Assessment Result",
           style: TextStyle(fontWeight: FontWeight.w600),
@@ -93,137 +97,122 @@ class _QueryScreenState extends State<QueryScreen> {
 
               // ================= RESULT CARD =================
               Container(
-                padding: const EdgeInsets.all(22),
+                padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(24),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      blurRadius: 12,
-                      offset: const Offset(0, 6),
+                      color: riskColor.withOpacity(0.08),
+                      blurRadius: 20,
+                      offset: const Offset(0, 10),
                     ),
                   ],
-                  border: Border.all(
-                    color: riskColor.withOpacity(0.4),
-                    width: 1.2,
-                  ),
                 ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment:
+                      CrossAxisAlignment.start,
                   children: [
 
                     const Text(
                       "Risk Level",
                       style: TextStyle(
                         fontSize: 13,
-                        color: Colors.grey,
-                      ),
-                    ),
-
-                    const SizedBox(height: 6),
-
-                    Text(
-                      risk.toUpperCase(),
-                      style: TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
-                        color: riskColor,
+                        color: Color(0xFF64748B),
                       ),
                     ),
 
                     const SizedBox(height: 10),
 
-                    Row(
-                      children: [
-                        const Text(
-                          "Score: ",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                          ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 18, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: riskColor.withOpacity(0.12),
+                        borderRadius:
+                            BorderRadius.circular(30),
+                      ),
+                      child: Text(
+                        risk.toUpperCase(),
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: riskColor,
                         ),
-                        Text(
-                          score,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
 
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 20),
 
-                    Row(
-                      children: [
-                        const Text(
-                          "Recommended Specialist: ",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Expanded(
-                          child: Text(
-                            specialist,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ],
+                    Text(
+                      "Score: $score",
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF1E293B),
+                      ),
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    Text(
+                      "Recommended Specialist: $specialist",
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF1E293B),
+                      ),
                     ),
                   ],
                 ),
               ),
 
-              const SizedBox(height: 30),
+              const SizedBox(height: 40),
 
-              // ================= HEADER =================
               const Text(
                 "Additional Information (Optional)",
                 style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF1C1C1C),
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xFF1E293B),
                 ),
               ),
 
-              const SizedBox(height: 6),
+              const SizedBox(height: 8),
 
               const Text(
                 "Provide extra details to help the doctor better understand your condition.",
                 style: TextStyle(
                   fontSize: 14,
-                  color: Colors.grey,
+                  color: Color(0xFF64748B),
                 ),
               ),
 
               const SizedBox(height: 20),
 
-              // ================= TEXT FIELD =================
+              // ================= FIXED LIGHT TEXT FIELD =================
               Container(
-                padding: const EdgeInsets.all(18),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(18),
+                  borderRadius: BorderRadius.circular(22),
                   border: Border.all(
                     color: Colors.grey.shade300,
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.03),
-                      blurRadius: 8,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
                 ),
+                padding: const EdgeInsets.all(20),
                 child: TextField(
                   controller: queryController,
                   maxLines: 5,
                   maxLength: 300,
-                  onChanged: (_) => setState(() {}),
+                  cursorColor: const Color(0xFF2563EB),
+                  style: const TextStyle(
+                    color: Color(0xFF1E293B),
+                  ),
                   decoration: const InputDecoration(
+                    filled: false,
                     hintText:
                         "Example: The pain worsens when walking or breathing deeply...",
+                    hintStyle: TextStyle(
+                      color: Color(0xFF94A3B8),
+                    ),
                     border: InputBorder.none,
                     counterText: "",
                   ),
@@ -238,25 +227,29 @@ class _QueryScreenState extends State<QueryScreen> {
                   "${queryController.text.length}/300",
                   style: const TextStyle(
                     fontSize: 12,
-                    color: Colors.grey,
+                    color: Color(0xFF64748B),
                   ),
                 ),
               ),
 
-              const SizedBox(height: 25),
+              const SizedBox(height: 35),
 
-              // ================= ACTION BUTTONS =================
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed:
                       isSubmitting ? null : submitQuery,
                   style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        const Color(0xFF2563EB),
+                    foregroundColor: Colors.white,
+                    elevation: 0,
                     padding:
-                        const EdgeInsets.symmetric(vertical: 18),
+                        const EdgeInsets.symmetric(
+                            vertical: 18),
                     shape: RoundedRectangleBorder(
                       borderRadius:
-                          BorderRadius.circular(18),
+                          BorderRadius.circular(22),
                     ),
                   ),
                   child: isSubmitting
@@ -279,7 +272,7 @@ class _QueryScreenState extends State<QueryScreen> {
                 ),
               ),
 
-              const SizedBox(height: 10),
+              const SizedBox(height: 12),
 
               Center(
                 child: TextButton(
@@ -289,6 +282,7 @@ class _QueryScreenState extends State<QueryScreen> {
                     "Skip and Continue",
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
+                      color: Color(0xFF2563EB),
                     ),
                   ),
                 ),

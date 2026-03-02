@@ -52,7 +52,8 @@ class _SymptomScreenState extends State<SymptomScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => QuestionScreen(symptomIds: selectedSymptoms),
+        builder: (_) =>
+            QuestionScreen(symptomIds: selectedSymptoms),
       ),
     );
   }
@@ -61,9 +62,13 @@ class _SymptomScreenState extends State<SymptomScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F8FB),
+      backgroundColor: const Color(0xFFF8FAFC),
 
       appBar: AppBar(
+        backgroundColor: Colors.white,
+        foregroundColor: const Color(0xFF1E293B),
+        elevation: 0,
+        centerTitle: true,
         title: const Text(
           "Health Check",
           style: TextStyle(fontWeight: FontWeight.w600),
@@ -73,7 +78,7 @@ class _SymptomScreenState extends State<SymptomScreen> {
       body: isLoading
           ? const Center(
               child: CircularProgressIndicator(
-                color: Color(0xFF1E88E5),
+                color: Color(0xFF2563EB),
               ),
             )
           : symptoms.isEmpty
@@ -82,7 +87,7 @@ class _SymptomScreenState extends State<SymptomScreen> {
                     "No symptoms available",
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.grey,
+                      color: Color(0xFF64748B),
                     ),
                   ),
                 )
@@ -99,8 +104,8 @@ class _SymptomScreenState extends State<SymptomScreen> {
                         "How are you feeling today?",
                         style: TextStyle(
                           fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF1C1C1C),
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xFF1E293B),
                         ),
                       ),
 
@@ -110,7 +115,7 @@ class _SymptomScreenState extends State<SymptomScreen> {
                         "Select all symptoms that apply to you.",
                         style: TextStyle(
                           fontSize: 15,
-                          color: Colors.grey,
+                          color: Color(0xFF64748B),
                         ),
                       ),
 
@@ -120,9 +125,9 @@ class _SymptomScreenState extends State<SymptomScreen> {
                       if (selectedSymptoms.isNotEmpty)
                         Container(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 8),
+                              horizontal: 18, vertical: 10),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF1E88E5)
+                            color: const Color(0xFF2563EB)
                                 .withOpacity(0.1),
                             borderRadius:
                                 BorderRadius.circular(30),
@@ -132,7 +137,7 @@ class _SymptomScreenState extends State<SymptomScreen> {
                             style: const TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 14,
-                              color: Color(0xFF1E88E5),
+                              color: Color(0xFF2563EB),
                             ),
                           ),
                         ),
@@ -161,10 +166,10 @@ class _SymptomScreenState extends State<SymptomScreen> {
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius:
-                                      BorderRadius.circular(16),
+                                      BorderRadius.circular(18),
                                   border: Border.all(
                                     color: isSelected
-                                        ? const Color(0xFF1E88E5)
+                                        ? const Color(0xFF2563EB)
                                         : Colors.grey.shade300,
                                     width: isSelected ? 1.6 : 1,
                                   ),
@@ -172,9 +177,9 @@ class _SymptomScreenState extends State<SymptomScreen> {
                                     BoxShadow(
                                       color: Colors.black
                                           .withOpacity(0.04),
-                                      blurRadius: 8,
+                                      blurRadius: 10,
                                       offset:
-                                          const Offset(0, 4),
+                                          const Offset(0, 5),
                                     ),
                                   ],
                                 ),
@@ -182,18 +187,18 @@ class _SymptomScreenState extends State<SymptomScreen> {
                                   children: [
 
                                     // Selection Circle
-                                    Container(
+                                    AnimatedContainer(
+                                      duration: const Duration(milliseconds: 200),
                                       height: 24,
                                       width: 24,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         color: isSelected
-                                            ? const Color(0xFF1E88E5)
+                                            ? const Color(0xFF2563EB)
                                             : Colors.white,
                                         border: Border.all(
                                           color: isSelected
-                                              ? const Color(
-                                                  0xFF1E88E5)
+                                              ? const Color(0xFF2563EB)
                                               : Colors.grey,
                                           width: 1.4,
                                         ),
@@ -217,8 +222,8 @@ class _SymptomScreenState extends State<SymptomScreen> {
                                           fontWeight: isSelected
                                               ? FontWeight.w600
                                               : FontWeight.w500,
-                                          color: const Color(
-                                              0xFF1C1C1C),
+                                          color:
+                                              const Color(0xFF1E293B),
                                         ),
                                       ),
                                     ),
@@ -238,6 +243,8 @@ class _SymptomScreenState extends State<SymptomScreen> {
                         child: ElevatedButton(
                           onPressed: goToQuestions,
                           style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color(0xFF2563EB),
                             padding:
                                 const EdgeInsets.symmetric(
                                     vertical: 18),

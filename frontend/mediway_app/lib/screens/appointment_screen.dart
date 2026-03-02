@@ -165,17 +165,17 @@ class _AppointmentScreenState
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius:
-              BorderRadius.circular(18),
+              BorderRadius.circular(20),
           border: Border.all(
               color:
                   Colors.grey.shade300),
           boxShadow: [
             BoxShadow(
-              color: Colors.black
-                  .withOpacity(0.04),
-              blurRadius: 8,
+              color: Colors.blue
+                  .withOpacity(0.05),
+              blurRadius: 15,
               offset:
-                  const Offset(0, 4),
+                  const Offset(0, 8),
             )
           ],
         ),
@@ -183,7 +183,7 @@ class _AppointmentScreenState
           children: [
             Icon(icon,
                 color:
-                    const Color(0xFF1E88E5)),
+                    const Color(0xFF2563EB)),
             const SizedBox(width: 14),
             Expanded(
               child: Text(
@@ -192,13 +192,15 @@ class _AppointmentScreenState
                   fontSize: 15,
                   fontWeight:
                       FontWeight.w600,
+                  color:
+                      Color(0xFF1E293B),
                 ),
               ),
             ),
             const Icon(
               Icons.arrow_forward_ios_rounded,
               size: 16,
-              color: Colors.grey,
+              color: Color(0xFF64748B),
             ),
           ],
         ),
@@ -211,9 +213,15 @@ class _AppointmentScreenState
 
     return Scaffold(
       backgroundColor:
-          const Color(0xFFF4F8FB),
+          const Color(0xFFF9FBFF),
 
       appBar: AppBar(
+        backgroundColor:
+            Colors.transparent,
+        elevation: 0,
+        foregroundColor:
+            const Color(0xFF1E293B),
+        centerTitle: true,
         title: const Text(
           "Book Appointment",
           style: TextStyle(
@@ -227,7 +235,7 @@ class _AppointmentScreenState
               child:
                   CircularProgressIndicator(
                 color:
-                    Color(0xFF1E88E5),
+                    Color(0xFF2563EB),
               ),
             )
           : doctors.isEmpty
@@ -235,32 +243,33 @@ class _AppointmentScreenState
                   child: Text(
                     "No doctors available",
                     style: TextStyle(
-                        fontSize: 16),
+                        fontSize: 16,
+                        color:
+                            Color(0xFF64748B)),
                   ),
                 )
               : SafeArea(
                   child:
                       SingleChildScrollView(
                     padding:
-                        const EdgeInsets.symmetric(
-                            horizontal: 24,
-                            vertical: 20),
+                        const EdgeInsets.all(
+                            24),
                     child: Column(
                       crossAxisAlignment:
                           CrossAxisAlignment
                               .start,
                       children: [
 
-                        // HEADER
                         const Text(
                           "Specialization",
                           style: TextStyle(
-                            fontSize: 13,
-                            color: Colors.grey,
+                            color:
+                                Color(0xFF64748B),
                           ),
                         ),
 
-                        const SizedBox(height: 6),
+                        const SizedBox(
+                            height: 6),
 
                         Text(
                           widget.specialization,
@@ -269,52 +278,20 @@ class _AppointmentScreenState
                             fontSize: 20,
                             fontWeight:
                                 FontWeight
-                                    .bold,
-                          ),
-                        ),
-
-                        const SizedBox(height: 30),
-
-                        // DOCTOR SELECT
-                        const Text(
-                          "Select Doctor",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight:
-                                FontWeight
-                                    .bold,
-                          ),
-                        ),
-
-                        const SizedBox(height: 12),
-
-                        Container(
-                          padding:
-                              const EdgeInsets.symmetric(
-                                  horizontal:
-                                      14),
-                          decoration:
-                              BoxDecoration(
+                                    .w600,
                             color:
+                                Color(0xFF1E293B),
+                          ),
+                        ),
+
+                        const SizedBox(
+                            height: 30),
+
+                        Theme(
+                          data: Theme.of(context)
+                              .copyWith(
+                            canvasColor:
                                 Colors.white,
-                            borderRadius:
-                                BorderRadius
-                                    .circular(
-                                        18),
-                            border: Border.all(
-                                color: Colors
-                                    .grey
-                                    .shade300),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors
-                                    .black
-                                    .withOpacity(
-                                        0.04),
-                                blurRadius:
-                                    8,
-                              )
-                            ],
                           ),
                           child:
                               DropdownButtonFormField<
@@ -322,14 +299,34 @@ class _AppointmentScreenState
                             value:
                                 selectedDoctorId,
                             isExpanded: true,
+                            dropdownColor:
+                                Colors.white,
+                            style: const TextStyle(
+                              color:
+                                  Color(0xFF1E293B),
+                              fontWeight:
+                                  FontWeight.w500,
+                            ),
                             decoration:
-                                const InputDecoration(
+                                InputDecoration(
+                              filled: true,
+                              fillColor:
+                                  Colors.white,
                               border:
-                                  InputBorder
-                                      .none,
+                                  OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius
+                                        .circular(
+                                            20),
+                              ),
                             ),
                             hint: const Text(
-                                "Choose Doctor"),
+                              "Select Doctor",
+                              style: TextStyle(
+                                color:
+                                    Color(0xFF64748B),
+                              ),
+                            ),
                             items: doctors.map<
                                     DropdownMenuItem<
                                         int>>(
@@ -339,7 +336,13 @@ class _AppointmentScreenState
                                 value:
                                     doc["id"],
                                 child: Text(
-                                    doc["name"]),
+                                  doc["name"],
+                                  style:
+                                      const TextStyle(
+                                    color: Color(
+                                        0xFF1E293B),
+                                  ),
+                                ),
                               );
                             }).toList(),
                             onChanged:
@@ -352,19 +355,8 @@ class _AppointmentScreenState
                           ),
                         ),
 
-                        const SizedBox(height: 30),
-
-                        const Text(
-                          "Select Date & Time",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight:
-                                FontWeight
-                                    .bold,
-                          ),
-                        ),
-
-                        const SizedBox(height: 15),
+                        const SizedBox(
+                            height: 30),
 
                         buildSelectionCard(
                           icon: Icons
@@ -380,7 +372,8 @@ class _AppointmentScreenState
                           onTap: pickDate,
                         ),
 
-                        const SizedBox(height: 14),
+                        const SizedBox(
+                            height: 16),
 
                         buildSelectionCard(
                           icon: Icons
@@ -394,7 +387,8 @@ class _AppointmentScreenState
                           onTap: pickTime,
                         ),
 
-                        const SizedBox(height: 40),
+                        const SizedBox(
+                            height: 40),
 
                         SizedBox(
                           width:
@@ -406,6 +400,19 @@ class _AppointmentScreenState
                                 isBooking
                                     ? null
                                     : bookAppointment,
+                            style:
+                                ElevatedButton
+                                    .styleFrom(
+                              backgroundColor:
+                                  const Color(
+                                      0xFF2563EB),
+                              shape:
+                                  RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(
+                                        20),
+                              ),
+                            ),
                             child:
                                 isBooking
                                     ? const SizedBox(
@@ -417,19 +424,16 @@ class _AppointmentScreenState
                                             CircularProgressIndicator(
                                           strokeWidth:
                                               2,
-                                          color: Colors
-                                              .white,
+                                          color:
+                                              Colors.white,
                                         ),
                                       )
                                     : const Text(
                                         "Confirm Appointment",
                                         style:
                                             TextStyle(
-                                          fontSize:
-                                              16,
                                           fontWeight:
-                                              FontWeight
-                                                  .w600,
+                                              FontWeight.w600,
                                         ),
                                       ),
                           ),
